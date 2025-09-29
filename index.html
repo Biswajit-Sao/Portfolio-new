@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Custom animations */
+    /* Enhanced custom animations */
     @keyframes floatY { 
       0% { transform: translateY(0) } 
       50% { transform: translateY(-8px) } 
@@ -22,6 +22,18 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+    @keyframes slideIn {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    @keyframes typewriter {
+      from { width: 0; }
+      to { width: 100%; }
+    }
     
     .animate-float { animation: floatY 4s ease-in-out infinite; }
     .animate-fadeIn { animation: fadeIn 0.8s ease-out forwards; }
@@ -30,19 +42,28 @@
       background-size: 400% 400%;
       animation: gradient 15s ease infinite;
     }
+    .animate-slideIn { animation: slideIn 0.8s ease-out forwards; }
+    .animate-pulse-slow { animation: pulse 3s ease-in-out infinite; }
+    .animate-typewriter {
+      overflow: hidden;
+      white-space: nowrap;
+      animation: typewriter 2s steps(40, end);
+    }
     
-    /* small subtle glass blur for cards */
+    /* Enhanced glass effect */
     .glass { 
       background: rgba(255,255,255,0.08); 
       backdrop-filter: blur(12px); 
       border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
     }
     .dark .glass { 
       background: rgba(10,11,13,0.4); 
       border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
     }
     
-    /* Custom scrollbar */
+    /* Enhanced custom scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
     }
@@ -59,13 +80,19 @@
     .dark ::-webkit-scrollbar-thumb {
       background: #4f46e5;
     }
-    
-    /* Smooth transitions */
-    * {
-      transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    ::-webkit-scrollbar-thumb:hover {
+      background: #818cf8;
+    }
+    .dark ::-webkit-scrollbar-thumb:hover {
+      background: #6366f1;
     }
     
-    /* Section animations */
+    /* Enhanced smooth transitions */
+    * {
+      transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    /* Enhanced section animations */
     section {
       opacity: 0;
       transform: translateY(20px);
@@ -76,7 +103,7 @@
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
     
-    /* Skill bar animation */
+    /* Enhanced skill bar animation */
     .skill-bar {
       height: 6px;
       border-radius: 3px;
@@ -96,24 +123,134 @@
     .skill-bar.animated .skill-progress {
       transform: translateX(0);
     }
+    
+    /* Enhanced hover effects */
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    .dark .hover-lift:hover {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Enhanced button effects */
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+    
+    /* Enhanced text gradient */
+    .text-gradient {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* Enhanced section dividers */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c7d2fe, transparent);
+    }
+    .dark .section-divider {
+      background: linear-gradient(90deg, transparent, #4f46e5, transparent);
+    }
+    
+    /* Enhanced loading animation */
+    .loading-dots {
+      display: inline-block;
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+    .loading-dots div {
+      position: absolute;
+      top: 33px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #4f46e5;
+      animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    }
+    .dark .loading-dots div {
+      background: #818cf8;
+    }
+    .loading-dots div:nth-child(1) {
+      left: 8px;
+      animation: loading-dots1 0.6s infinite;
+    }
+    .loading-dots div:nth-child(2) {
+      left: 8px;
+      animation: loading-dots2 0.6s infinite;
+    }
+    .loading-dots div:nth-child(3) {
+      left: 32px;
+      animation: loading-dots2 0.6s infinite;
+    }
+    .loading-dots div:nth-child(4) {
+      left: 56px;
+      animation: loading-dots3 0.6s infinite;
+    }
+    @keyframes loading-dots1 {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+    @keyframes loading-dots3 {
+      0% { transform: scale(1); }
+      100% { transform: scale(0); }
+    }
+    @keyframes loading-dots2 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(24px, 0); }
+    }
   </style>
 </head>
 <body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-500">
 
+  <!-- Loading Screen -->
+  <div id="loadingScreen" class="fixed inset-0 z-50 flex items-center justify-center bg-white dark:bg-slate-900 transition-opacity duration-500">
+    <div class="text-center">
+      <div class="loading-dots mx-auto mb-4">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <p class="text-lg font-medium text-slate-700 dark:text-slate-300">Loading Portfolio</p>
+    </div>
+  </div>
+
   <!-- Container -->
   <div class="min-h-screen flex flex-col">
 
-    <!-- NAV -->
-    <header class="w-full sticky top-0 z-50 backdrop-blur-lg bg-white/80 dark:bg-slate-900/80 border-b border-slate-200/50 dark:border-slate-800/50 transition-all duration-300">
+    <!-- Enhanced NAV -->
+    <header class="w-full sticky top-0 z-50 backdrop-blur-lg bg-white/90 dark:bg-slate-900/90 border-b border-slate-200/50 dark:border-slate-800/50 transition-all duration-300">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <a href="#home" class="flex items-center gap-3 group">
             <div class="relative">
               <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-30 group-hover:opacity-70 transition duration-300"></div>
-              <img src="./assets/profile-pic.png" alt="Biswajit" class="relative w-10 h-10 rounded-full ring-2 ring-indigo-400/30"/>
+              <img src="./assets/profile-pic.png" alt="Biswajit" class="relative w-10 h-10 rounded-full ring-2 ring-indigo-400/30 object-cover"/>
             </div>
             <div>
-              <h1 class="font-bold text-lg leading-none">Biswajit <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Sao</span></h1>
+              <h1 class="font-bold text-lg leading-none">Biswajit <span class="text-gradient">Sao</span></h1>
               <p class="text-xs text-slate-500 dark:text-slate-400 -mt-1">MERN Stack Developer</p>
             </div>
           </a>
@@ -139,30 +276,29 @@
               Contact
               <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-500 transition-all group-hover:w-full"></span>
             </a>
-            <a href="./assets/Biswajit Sao.pdf" target="_blank" class="relative inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+            <a href="./assets/Biswajit Sao.pdf" target="_blank" class="btn-primary relative inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
               <span class="relative z-10 flex items-center gap-2">
                 <i class="fas fa-file-alt"></i> Resume
               </span>
-              <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </a>
           </nav>
 
           <div class="flex items-center gap-3">
-            <!-- dark mode toggle -->
-            <button id="themeToggle" aria-label="Toggle theme" class="p-2 rounded-lg glass hover:scale-105 transition-transform shadow-sm">
+            <!-- Enhanced dark mode toggle -->
+            <button id="themeToggle" aria-label="Toggle theme" class="p-2 rounded-lg glass hover:scale-105 transition-transform shadow-sm hover-lift">
               <svg id="sun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block" viewBox="0 0 20 20" fill="currentColor"><path d="M10 15a5 5 0 100-10 5 5 0 000 10z"/></svg>
               <svg id="moon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:hidden" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
             </button>
 
-            <!-- mobile menu button -->
-            <button id="menuBtn" class="md:hidden p-2 rounded-lg glass shadow-sm" aria-label="Open menu">
+            <!-- Enhanced mobile menu button -->
+            <button id="menuBtn" class="md:hidden p-2 rounded-lg glass shadow-sm hover-lift" aria-label="Open menu">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
             </button>
           </div>
         </div>
       </div>
 
-      <!-- mobile menu -->
+      <!-- Enhanced mobile menu -->
       <div id="mobileMenu" class="hidden md:hidden border-t border-slate-200/50 dark:border-slate-800/50 backdrop-blur-lg bg-white/95 dark:bg-slate-900/95">
         <div class="px-4 py-4 flex flex-col gap-2">
           <a href="#home" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-2"><i class="fas fa-home w-5"></i> Home</a>
@@ -170,18 +306,18 @@
           <a href="#skills" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-2"><i class="fas fa-code w-5"></i> Skills</a>
           <a href="#projects" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-2"><i class="fas fa-project-diagram w-5"></i> Projects</a>
           <a href="#contact" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-2"><i class="fas fa-envelope w-5"></i> Contact</a>
-          <a href="./assets/Biswajit Sao.pdf" target="_blank" class="px-3 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center flex items-center justify-center gap-2 mt-2"><i class="fas fa-file-alt"></i> Resume</a>
+          <a href="./assets/Biswajit Sao.pdf" target="_blank" class="btn-primary px-3 py-2 rounded-lg text-white text-center flex items-center justify-center gap-2 mt-2"><i class="fas fa-file-alt"></i> Resume</a>
         </div>
       </div>
     </header>
 
-    <!-- HERO -->
+    <!-- Enhanced HERO -->
     <main class="flex-1">
       <section id="home" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-        <!-- left: intro -->
+        <!-- Enhanced left: intro -->
         <div class="space-y-6 animate-fadeIn">
-          <p class="inline-flex items-center gap-2 text-sm font-medium px-4 py-1.5 rounded-full bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/40 dark:to-purple-900/40 text-indigo-600 dark:text-indigo-300 w-max shadow-sm">
+          <p class="inline-flex items-center gap-2 text-sm font-medium px-4 py-1.5 rounded-full bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/40 dark:to-purple-900/40 text-indigo-600 dark:text-indigo-300 w-max shadow-sm hover-lift">
             <span class="relative flex h-2 w-2">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
@@ -189,40 +325,40 @@
             Available for new opportunities
           </p>
           <h2 class="text-4xl sm:text-5xl font-extrabold leading-tight">
-            Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Biswajit Sao</span>
+            Hi, I'm <span class="text-gradient">Biswajit Sao</span>
             <br/>
-            <span class="text-xl text-slate-500 dark:text-slate-400 font-medium">MERN Stack Developer</span>
+            <span class="text-xl text-slate-500 dark:text-slate-400 font-medium animate-typewriter">MERN Stack Developer</span>
           </h2>
           <p class="text-slate-600 dark:text-slate-300 max-w-xl text-lg leading-relaxed">
             I build scalable, user-friendly, high-performance web applications using React, Node.js, and MongoDB. I enjoy turning complex problems into elegant code and delightful UX.
           </p>
 
           <div class="flex flex-wrap gap-4">
-            <a href="./assets/Biswajit Sao.pdf" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 shadow-lg hover:shadow-xl transition-all duration-300">
+            <a href="./assets/Biswajit Sao.pdf" target="_blank" class="btn-primary inline-flex items-center gap-2 px-5 py-3 rounded-xl text-white shadow-lg hover:shadow-xl transition-all duration-300">
               <i class="fas fa-download"></i> Download CV
             </a>
-            <a href="#contact" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-700 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors">
+            <a href="#contact" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-700 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-colors hover-lift">
               <i class="fas fa-phone-alt"></i> Contact Me
             </a>
-            <a href="#projects" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl glass hover:shadow-md transition-all">
+            <a href="#projects" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl glass hover:shadow-md transition-all hover-lift">
               <i class="fas fa-star"></i> See Projects
             </a>
           </div>
 
           <div class="mt-8 flex items-center gap-4">
             <div class="flex items-center gap-4">
-              <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-xl shadow-lg animate-float">B</div>
+              <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-xl shadow-lg animate-float animate-pulse-slow">B</div>
               <div>
                 <p class="text-base font-medium">Open to: Full-time / Internships</p>
-                <p class="text-sm text-slate-500 dark:text-slate-400">Bankura, West Bengal, India, India • Remote friendly</p>
+                <p class="text-sm text-slate-500 dark:text-slate-400">Bankura, West Bengal, India • Remote friendly</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- right: profile card -->
+        <!-- Enhanced right: profile card -->
         <aside class="relative animate-fadeIn" style="animation-delay: 0.2s">
-          <div class="glass rounded-3xl p-8 shadow-2xl border border-slate-100/50 dark:border-slate-800/50 relative z-10">
+          <div class="glass rounded-3xl p-8 shadow-2xl border border-slate-100/50 dark:border-slate-800/50 relative z-10 hover-lift">
             <div class="relative">
               <div class="absolute -inset-4 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full blur opacity-30 animate-pulse"></div>
               <img src="./assets/profile-pic.png" alt="Biswajit" class="relative w-40 h-40 rounded-full object-cover ring-4 ring-white dark:ring-slate-900 mx-auto shadow-lg" />
@@ -231,40 +367,44 @@
             <p class="text-center text-slate-500 dark:text-slate-400">MERN Stack Developer</p>
 
             <div class="mt-8 grid grid-cols-3 gap-4 text-center">
-              <div class="p-3 rounded-xl bg-white/50 dark:bg-slate-800/50 shadow-sm">
+              <div class="p-3 rounded-xl bg-white/50 dark:bg-slate-800/50 shadow-sm hover-lift">
                 <p class="text-lg font-bold text-indigo-600 dark:text-indigo-400">12+</p>
                 <p class="text-xs text-slate-500 dark:text-slate-400">Projects</p>
               </div>
-              <div class="p-3 rounded-xl bg-white/50 dark:bg-slate-800/50 shadow-sm">
+              <div class="p-3 rounded-xl bg-white/50 dark:bg-slate-800/50 shadow-sm hover-lift">
                 <p class="text-lg font-bold text-indigo-600 dark:text-indigo-400">1 yrs</p>
                 <p class="text-xs text-slate-500 dark:text-slate-400">Experience</p>
               </div>
-              <div class="p-3 rounded-xl bg-white/50 dark:bg-slate-800/50 shadow-sm">
+              <div class="p-3 rounded-xl bg-white/50 dark:bg-slate-800/50 shadow-sm hover-lift">
                 <p class="text-lg font-bold text-indigo-600 dark:text-indigo-400">MERN</p>
                 <p class="text-xs text-slate-500 dark:text-slate-400">Skills</p>
               </div>
             </div>
 
             <div class="mt-8 flex justify-center gap-4">
-              <a href="https://github.com/Biswajit-Sao" target="_blank" class="p-3 rounded-xl glass hover:scale-105 transition-transform shadow-sm hover:shadow-md">
+              <a href="https://github.com/Biswajit-Sao" target="_blank" class="p-3 rounded-xl glass hover:scale-105 transition-transform shadow-sm hover:shadow-md hover-lift">
                 <i class="fab fa-github text-xl"></i>
               </a>
-              <a href="https://www.linkedin.com/in/biswajit-sao-6581a9359/" target="_blank" class="p-3 rounded-xl glass hover:scale-105 transition-transform shadow-sm hover:shadow-md">
+              <a href="https://www.linkedin.com/in/biswajit-sao-6581a9359/" target="_blank" class="p-3 rounded-xl glass hover:scale-105 transition-transform shadow-sm hover:shadow-md hover-lift">
                 <i class="fab fa-linkedin text-xl"></i>
               </a>
-              <a href="mailto:saobiswajit4@gmail.com" class="p-3 rounded-xl glass hover:scale-105 transition-transform shadow-sm hover:shadow-md">
+              <a href="mailto:saobiswajit4@gmail.com" class="p-3 rounded-xl glass hover:scale-105 transition-transform shadow-sm hover:shadow-md hover-lift">
                 <i class="fas fa-envelope text-xl"></i>
               </a>
             </div>
           </div>
 
-          <!-- decorative shapes -->
+          <!-- Enhanced decorative shapes -->
           <div class="absolute -left-10 -top-10 w-48 h-48 rounded-full bg-gradient-to-tr from-indigo-300 to-purple-300 opacity-20 blur-3xl animate-float" style="animation-delay: 1s"></div>
           <div class="absolute -right-8 -bottom-8 w-40 h-40 rounded-full bg-gradient-to-tr from-pink-300 to-blue-300 opacity-20 blur-3xl animate-float" style="animation-delay: 2s"></div>
+          <div class="absolute -left-5 top-1/2 w-24 h-24 rounded-full bg-gradient-to-tr from-yellow-300 to-orange-300 opacity-20 blur-3xl animate-float" style="animation-delay: 1.5s"></div>
         </aside>
       </section>
 
-      <!-- ABOUT -->
+      <!-- Section Divider -->
+      <div class="section-divider max-w-6xl mx-auto my-8"></div>
+
+      <!-- Enhanced ABOUT -->
       <section id="about" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-transparent">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           <div class="md:col-span-2">
@@ -273,7 +413,7 @@
             <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">Hello! I'm <strong class="text-indigo-600 dark:text-indigo-400">Biswajit Sao</strong>, a passionate Full-Stack Developer specializing in the MERN stack. I enjoy transforming complex problems into simple, beautiful, and intuitive designs. I write clean and efficient code that drives results.</p>
 
             <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div class="p-6 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transition-all duration-300">
+              <div class="p-6 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transition-all duration-300 hover-lift">
                 <h4 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-graduation-cap text-indigo-500"></i> Education</h4>
                 <ul class="mt-4 text-slate-600 dark:text-slate-300 space-y-3">
                   <li class="flex items-start gap-2">
@@ -287,7 +427,7 @@
                 </ul>
               </div>
 
-              <div class="p-6 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transition-all duration-300">
+              <div class="p-6 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transition-all duration-300 hover-lift">
                 <h4 class="font-bold text-lg flex items-center gap-2"><i class="fas fa-heart text-indigo-500"></i> Interests</h4>
                 <ul class="mt-4 text-slate-600 dark:text-slate-300 space-y-3">
                   <li class="flex items-start gap-2">
@@ -311,7 +451,7 @@
             </div>
           </div>
 
-          <div class="p-6 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div class="p-6 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transition-all duration-300 hover-lift">
             <h4 class="font-bold text-lg flex items-center gap-2 mb-4"><i class="fas fa-info-circle text-indigo-500"></i> Quick Facts</h4>
             <dl class="text-slate-600 dark:text-slate-300 space-y-4">
               <div class="flex justify-between items-center py-2 border-b border-slate-100 dark:border-slate-800">
@@ -328,7 +468,7 @@
               </div>
             </dl>
             
-            <div class="mt-6 p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20">
+            <div class="mt-6 p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 hover-lift">
               <p class="text-sm text-slate-600 dark:text-slate-300 text-center">
                 <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
                 Currently learning advanced React patterns
@@ -338,12 +478,15 @@
         </div>
       </section>
 
-      <!-- SKILLS -->
+      <!-- Section Divider -->
+      <div class="section-divider max-w-6xl mx-auto my-8"></div>
+
+      <!-- Enhanced SKILLS -->
       <section id="skills" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <h2 class="text-3xl font-bold mb-2">Skills</h2>
         <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full mb-8"></div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="p-6 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transition-all duration-300 group">
+          <div class="p-6 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transition-all duration-300 group hover-lift">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
               <i class="fas fa-code text-xl"></i>
             </div>
@@ -353,7 +496,7 @@
               <div class="skill-progress" style="width: 90%"></div>
             </div>
           </div>
-          <div class="p-6 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transition-all duration-300 group">
+          <div class="p-6 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transition-all duration-300 group hover-lift">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
               <i class="fas fa-server text-xl"></i>
             </div>
@@ -363,7 +506,7 @@
               <div class="skill-progress" style="width: 85%"></div>
             </div>
           </div>
-          <div class="p-6 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transition-all duration-300 group">
+          <div class="p-6 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transition-all duration-300 group hover-lift">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
               <i class="fas fa-tools text-xl"></i>
             </div>
@@ -373,7 +516,7 @@
               <div class="skill-progress" style="width: 80%"></div>
             </div>
           </div>
-          <div class="p-6 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transition-all duration-300 group">
+          <div class="p-6 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transition-all duration-300 group hover-lift">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
               <i class="fas fa-users text-xl"></i>
             </div>
@@ -386,14 +529,17 @@
         </div>
       </section>
 
-      <!-- PROJECTS -->
+      <!-- Section Divider -->
+      <div class="section-divider max-w-6xl mx-auto my-8"></div>
+
+      <!-- Enhanced PROJECTS -->
       <section id="projects" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <h2 class="text-3xl font-bold mb-2">Projects</h2>
         <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full mb-8"></div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-          <!-- card 1 -->
-          <article class="p-6 rounded-2xl glass border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group">
+          <!-- Enhanced card 1 -->
+          <article class="p-6 rounded-2xl glass border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group hover-lift">
             <div class="relative overflow-hidden rounded-xl mb-4">
               <img src="./assets/project-1.jpg" alt="Doctor Appointment" class="w-full h-48 object-cover rounded-xl group-hover:scale-105 transition-transform duration-500" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
@@ -407,17 +553,17 @@
               <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 rounded-full text-xs font-medium">MongoDB</span>
             </div>
             <div class="flex gap-3">
-              <a href="https://github.com/Biswajit-Sao/Doctor-Appointment-Booking-System" target="_blank" class="flex-1 text-center px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 shadow transition-all flex items-center justify-center gap-2">
+              <a href="https://github.com/Biswajit-Sao/Doctor-Appointment-Booking-System" target="_blank" class="btn-primary flex-1 text-center px-4 py-2 rounded-lg text-white shadow transition-all flex items-center justify-center gap-2">
                 <i class="fab fa-github"></i> GitHub
               </a>
-              <a href="https://astonishing-treacle-d0653d.netlify.app/" target="_blank" class="flex-1 text-center px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors flex items-center justify-center gap-2">
+              <a href="https://astonishing-treacle-d0653d.netlify.app/" target="_blank" class="flex-1 text-center px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors flex items-center justify-center gap-2 hover-lift">
                 <i class="fas fa-external-link-alt"></i> Live Demo
               </a>
             </div>
           </article>
 
-          <!-- card 2 -->
-          <article class="p-6 rounded-2xl glass border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group">
+          <!-- Enhanced card 2 -->
+          <article class="p-6 rounded-2xl glass border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group hover-lift">
             <div class="relative overflow-hidden rounded-xl mb-4">
               <img src="./assets/project-2.jpg" alt="Job Portal" class="w-full h-48 object-cover rounded-xl group-hover:scale-105 transition-transform duration-500" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
@@ -431,17 +577,17 @@
               <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 rounded-full text-xs font-medium">MongoDB</span>
             </div>
             <div class="flex gap-3">
-              <a href="https://github.com/Biswajit-Sao/job-portal" target="_blank" class="flex-1 text-center px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 shadow transition-all flex items-center justify-center gap-2">
+              <a href="https://github.com/Biswajit-Sao/job-portal" target="_blank" class="btn-primary flex-1 text-center px-4 py-2 rounded-lg text-white shadow transition-all flex items-center justify-center gap-2">
                 <i class="fab fa-github"></i> GitHub
               </a>
-              <a href="https://job-portal-nlty.onrender.com/" target="_blank" class="flex-1 text-center px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors flex items-center justify-center gap-2">
+              <a href="https://job-portal-nlty.onrender.com/" target="_blank" class="flex-1 text-center px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors flex items-center justify-center gap-2 hover-lift">
                 <i class="fas fa-external-link-alt"></i> Live Demo
               </a>
             </div>
           </article>
 
-          <!-- card 3 -->
-          <article class="p-6 rounded-2xl glass border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group">
+          <!-- Enhanced card 3 -->
+          <article class="p-6 rounded-2xl glass border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group hover-lift">
             <div class="relative overflow-hidden rounded-xl mb-4">
               <img src="./assets/project-3.jpg" alt="E-Commerce" class="w-full h-48 object-cover rounded-xl group-hover:scale-105 transition-transform duration-500" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
@@ -455,10 +601,10 @@
               <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 rounded-full text-xs font-medium">MongoDB</span>
             </div>
             <div class="flex gap-3">
-              <a href="https://github.com/Biswajit-Sao/e-commerce" target="_blank" class="flex-1 text-center px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 shadow transition-all flex items-center justify-center gap-2">
+              <a href="https://github.com/Biswajit-Sao/e-commerce" target="_blank" class="btn-primary flex-1 text-center px-4 py-2 rounded-lg text-white shadow transition-all flex items-center justify-center gap-2">
                 <i class="fab fa-github"></i> GitHub
               </a>
-              <a href="https://e-commerce-bs.netlify.app/" target="_blank" class="flex-1 text-center px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors flex items-center justify-center gap-2">
+              <a href="https://e-commerce-bs.netlify.app/" target="_blank" class="flex-1 text-center px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors flex items-center justify-center gap-2 hover-lift">
                 <i class="fas fa-external-link-alt"></i> Live Demo
               </a>
             </div>
@@ -467,12 +613,15 @@
         </div>
       </section>
 
-      <!-- CONTACT -->
+      <!-- Section Divider -->
+      <div class="section-divider max-w-6xl mx-auto my-8"></div>
+
+      <!-- Enhanced CONTACT -->
       <section id="contact" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <h2 class="text-3xl font-bold mb-2">Contact Me</h2>
         <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full mb-8"></div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="p-8 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg">
+          <div class="p-8 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover-lift">
             <h3 class="text-xl font-bold mb-6">Send a Message</h3>
             <form action="#" class="space-y-5">
               <div>
@@ -488,18 +637,18 @@
                 <textarea class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all" rows="4" placeholder="Say hi..."></textarea>
               </div>
               <div class="flex items-center gap-4">
-                <button class="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
+                <button class="btn-primary px-6 py-3 rounded-xl text-white shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
                   <i class="fas fa-paper-plane"></i> Send Message
                 </button>
-                <a href="mailto:saobiswajit4@gmail.com" class="px-6 py-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors">Or email me</a>
+                <a href="mailto:saobiswajit4@gmail.com" class="px-6 py-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors hover-lift">Or email me</a>
               </div>
             </form>
           </div>
 
-          <div class="p-8 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg">
+          <div class="p-8 glass rounded-2xl border border-slate-100/50 dark:border-slate-800/50 shadow-lg hover-lift">
             <h3 class="text-xl font-bold mb-6">Let's connect</h3>
             <div class="space-y-4">
-              <div class="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 transition-colors">
+              <div class="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 transition-colors hover-lift">
                 <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white">
                   <i class="fas fa-envelope"></i>
                 </div>
@@ -509,7 +658,7 @@
                 </div>
               </div>
               
-              <div class="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 transition-colors">
+              <div class="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 transition-colors hover-lift">
                 <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white">
                   <i class="fab fa-github"></i>
                 </div>
@@ -519,7 +668,7 @@
                 </div>
               </div>
               
-              <div class="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 transition-colors">
+              <div class="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 transition-colors hover-lift">
                 <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white">
                   <i class="fab fa-linkedin"></i>
                 </div>
@@ -529,7 +678,7 @@
                 </div>
               </div>
               
-              <div class="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 transition-colors">
+              <div class="flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 transition-colors hover-lift">
                 <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white">
                   <i class="fas fa-map-marker-alt"></i>
                 </div>
@@ -540,7 +689,7 @@
               </div>
             </div>
 
-            <div class="mt-8 p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 border border-indigo-100 dark:border-indigo-900/30">
+            <div class="mt-8 p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 border border-indigo-100 dark:border-indigo-900/30 hover-lift">
               <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
                   <i class="fas fa-check"></i>
@@ -556,7 +705,7 @@
       </section>
     </main>
 
-    <!-- FOOTER -->
+    <!-- Enhanced FOOTER -->
     <footer class="border-t border-slate-200/50 dark:border-slate-800/50 mt-12">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3">
@@ -564,17 +713,17 @@
           <p class="text-sm">© <span id="year"></span> Biswajit Sao. All Rights Reserved.</p>
         </div>
         <div class="flex items-center gap-6">
-          <a href="#home" class="text-sm hover:text-indigo-500 transition-colors flex items-center gap-1">
+          <a href="#home" class="text-sm hover:text-indigo-500 transition-colors flex items-center gap-1 hover-lift">
             <i class="fas fa-arrow-up text-xs"></i> Back to top
           </a>
           <div class="flex gap-4">
-            <a href="https://github.com/Biswajit-Sao" target="_blank" class="text-slate-500 hover:text-indigo-500 transition-colors">
+            <a href="https://github.com/Biswajit-Sao" target="_blank" class="text-slate-500 hover:text-indigo-500 transition-colors hover-lift">
               <i class="fab fa-github"></i>
             </a>
-            <a href="https://www.linkedin.com/in/biswajit-sao-6581a9359/" target="_blank" class="text-slate-500 hover:text-indigo-500 transition-colors">
+            <a href="https://www.linkedin.com/in/biswajit-sao-6581a9359/" target="_blank" class="text-slate-500 hover:text-indigo-500 transition-colors hover-lift">
               <i class="fab fa-linkedin"></i>
             </a>
-            <a href="mailto:saobiswajit4@gmail.com" class="text-slate-500 hover:text-indigo-500 transition-colors">
+            <a href="mailto:saobiswajit4@gmail.com" class="text-slate-500 hover:text-indigo-500 transition-colors hover-lift">
               <i class="fas fa-envelope"></i>
             </a>
           </div>
@@ -585,10 +734,19 @@
   </div>
 
   <script>
+    // Enhanced loading screen
+    window.addEventListener('load', function() {
+      const loadingScreen = document.getElementById('loadingScreen');
+      loadingScreen.style.opacity = '0';
+      setTimeout(() => {
+        loadingScreen.style.display = 'none';
+      }, 4000);
+    });
+
     // set year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // theme toggle
+    // Enhanced theme toggle
     const html = document.documentElement;
     const themeToggle = document.getElementById('themeToggle');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -603,14 +761,22 @@
     themeToggle.addEventListener('click', () => {
       html.classList.toggle('dark');
       localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+      
+      // Add animation to theme toggle
+      themeToggle.classList.add('animate-pulse');
+      setTimeout(() => {
+        themeToggle.classList.remove('animate-pulse');
+      }, 300);
     });
 
-    // mobile menu
+    // Enhanced mobile menu
     menuBtn.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
+      menuBtn.classList.toggle('bg-indigo-50');
+      menuBtn.classList.toggle('dark:bg-slate-800');
     });
 
-    // Scroll animations
+    // Enhanced Scroll animations
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -637,12 +803,56 @@
       observer.observe(section);
     });
 
-    // Close mobile menu when clicking on a link
+    // Enhanced Close mobile menu when clicking on a link
     document.querySelectorAll('#mobileMenu a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
+        menuBtn.classList.remove('bg-indigo-50');
+        menuBtn.classList.remove('dark:bg-slate-800');
       });
     });
+
+    // Enhanced Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Enhanced Form submission animation
+    const contactForm = document.querySelector('form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitBtn.disabled = true;
+        
+        // Simulate form submission
+        setTimeout(() => {
+          submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent!';
+          submitBtn.classList.remove('btn-primary');
+          submitBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+          
+          setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            submitBtn.classList.add('btn-primary');
+            submitBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+            contactForm.reset();
+          }, 2000);
+        }, 1500);
+      });
+    }
   </script>
 </body>
 </html>
